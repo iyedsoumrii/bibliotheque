@@ -20,7 +20,7 @@ if (! empty($_POST["login-btn"])) {
 	<div class="phppot-container">
 		<div class="sign-up-container">
 			<div class="login-signup">
-				<a href="admin-registration.php">Sign up</a>
+				
 			</div>
 			<div class="signup-align">
 				<form name="login" action="" method="post"

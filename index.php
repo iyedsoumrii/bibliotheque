@@ -47,7 +47,7 @@
 <body>
 	<h1>Se connecter en tant que :</h1>
 	<div class="container">
-		<a href="admin-registration.php">Admin</a>
+		<a href="admin-login.php">Admin</a>
 		<a href="user-registration.php">Client</a>
 	</div>
 </body>

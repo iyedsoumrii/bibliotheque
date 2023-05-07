@@ -71,7 +71,9 @@ $contenu .= '<label for="titre">Titre</label>
 	if($modif) $contenu .= " value=\"$livre[titre]\"";
 	$contenu .= '><br>';
 
-  
+$contenu .= '<label for="image">Sélectionnez une image à télécharger :</label>
+	<input type="file" name="image" id="image">
+	<br><br>';
 	
 	$contenu .= '<input type="submit" value="';
 		if($modif) $contenu .= 'Modification';
