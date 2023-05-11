@@ -1,13 +1,46 @@
+
 <?php
+require('inc/init.inc.php');
+
 //----------------------------------------------------------------------------------------------------------
 // Enregistrement :
-if($_POST)
+if(isset($_POST['id_livre'])) 
 {
-	if(isset($_POST['id_livre'])) $id_livre = $_POST['id_livre']; else $id_livre = ''; 
-	$resultat = $mysqli->query("REPLACE INTO livre (id_livre, auteur, titre) VALUES ('$id_livre', '$_POST[auteur]', '$_POST[titre]')");
-	if(!empty($mysqli->error)) header('location:?page=livre&enregistrement=erreur');
-	else  header('location:?page=livre&enregistrement=valide');
+    $id_livre = $_POST['id_livre'];
 }
+else
+{
+    $id_livre = ''; 
+}
+$na=$_FILES['imagee']["name"];
+move_uploaded_file($_FILES['imagee']['tmp_name'], '/' . $na);
+
+
+if(isset($_FILES['imagee']) && $_FILES['imagee']['error']==0)
+{
+    $imagee=$_FILES["imagee"]["name"];
+    $target_path = 'uploads/' . $imagee;
+    if(!move_uploaded_file($_FILES['imagee']['tmp_name'], $target_path)) {
+        header('location:?page=livre&enregistrement=erreur');
+        exit;
+    }
+}
+
+if(isset($_FILES['imagee']) && $_FILES['imagee']['error']==0)
+{
+    $resultat = $mysqli->query("REPLACE INTO livre (auteur, titre, imagee) VALUES ('$_POST[auteur]', '$_POST[titre]','$na')");
+    if(!empty($mysqli->error))
+	{
+    header('location:?page=livre&enregistrement=erreur');
+		echo $na;
+	}
+    else  
+        header('location:?page=livre&enregistrement=valide');
+}
+
+
+
+
 //----------------------------------------------------------------------------------------------------------
 // Suppression
 if(isset($_GET['action']) && $_GET['action'] == 'suppression')
@@ -71,8 +104,8 @@ $contenu .= '<label for="titre">Titre</label>
 	if($modif) $contenu .= " value=\"$livre[titre]\"";
 	$contenu .= '><br>';
 
-$contenu .= '<label for="image">Sélectionnez une image à télécharger :</label>
-	<input type="file" name="image" id="image">
+$contenu .= '<label for="imagee">Sélectionnez une image à télécharger :</label>
+	<input type="file" name="imagee" id="imagee">
 	<br><br>';
 	
 	$contenu .= '<input type="submit" value="';

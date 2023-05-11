@@ -36,14 +36,14 @@ $result = $mysqli->query("SELECT * FROM livre");
                 <tr>
                     <th>Auteur</th>
                     <th>Titre</th>
-                    <th>Fichier</th>
+                    <th>image</th>
                 </tr>
                 <?php
                     while($book = $result->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>".$book['auteur']."</td>";
                         echo "<td>".$book['titre']."</td>";
-                        echo "<td>".$book['fichier']."</td>";
+                        echo "<td>".$book['imagee']."</td>";
                         echo "</tr>";
                     }
                 ?>
